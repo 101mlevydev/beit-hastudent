@@ -1,6 +1,6 @@
 # Step 07 — RTL shell + guided multi-step input form
 
-**Phase:** UI · **Status:** todo · **Depends on:** 03, 06
+**Phase:** UI · **Status:** done · **Depends on:** 03, 06
 
 ## Goal
 A friendly, guided, one-section-at-a-time intake that collects the **full input set** and calls the
