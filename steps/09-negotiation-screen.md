@@ -1,6 +1,6 @@
 # Step 09 — Negotiation screen + hand-off (copy + wa.me)
 
-**Phase:** UI · **Status:** todo · **Depends on:** 08
+**Phase:** UI · **Status:** done · **Depends on:** 08
 
 ## Goal
 Surface the signature feature as its own polished view — the wow beat. **Polish this hardest**

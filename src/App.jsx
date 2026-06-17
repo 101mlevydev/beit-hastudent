@@ -2,6 +2,7 @@ import { AppProvider, useApp } from './stores/appStore.jsx';
 import { APP } from './lib/copy.js';
 import Form from './components/Form/Form.jsx';
 import Results from './components/Results/Results.jsx';
+import NegotiationCard from './components/Negotiation/NegotiationCard.jsx';
 
 function Shell() {
   const { screen, refsLoading, refsError } = useApp();
@@ -40,6 +41,7 @@ function Shell() {
       <main className="screen-host">
         {screen === 'form' && <Form />}
         {screen === 'results' && <Results />}
+        {screen === 'negotiation' && <NegotiationCard />}
       </main>
     </div>
   );
