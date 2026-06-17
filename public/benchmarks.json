@@ -1,49 +1,56 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "dataDate": "2026-06",
-  "disclaimer": "טווחים מקומיים משוערים לעיון בלבד — לא מדד מחירים רשמי. ניתן לעריכה.",
+  "disclaimer": "טווחים מקומיים לעיון בלבד — לא מדד מחירים רשמי. ניתן לעריכה.",
   "campusAnchor": "שער ראשי, אוניברסיטת בן-גוריון",
-  "_note": "PLACEHOLDER ranges — rough local reference, pending the Step 12 content gate (verified per-room ₪ ranges + walk-times from real local knowledge).",
+  "_note": "Reconciled 2026-06 snapshot from BGU housing guide, bgu.co.il, do-israel, Madlan + arnona rate tables. perRoom = ₪/month per Israeli room (a '3-room' apt ≈ 2BR+salon → expected rent ≈ perRoom × rooms). Gimel/Dalet/Old-City have direct source anchors; Ringelblum/Masada are interpolated. Still pending the Step 12 content gate (local verification).",
   "neighborhoods": {
     "gimel": {
       "name": "שכונה ג'",
-      "perRoom": { "min": 1400, "typical": 1600, "max": 1750 },
-      "walkMin": { "min": 6, "max": 16 },
+      "perRoom": { "min": 850, "typical": 1100, "max": 1350 },
+      "walkMin": { "min": 10, "max": 18 },
       "sun": "mixed",
-      "notes": "ביקוש גבוה, קרוב לקמפוס"
+      "notes": "מלאי ישן, מאוד פופולרי בקרב סטודנטים, ~10-15 דק' הליכה; בד\"כ מעט זול יותר מד'"
     },
     "dalet": {
       "name": "שכונה ד'",
-      "perRoom": { "min": 1300, "typical": 1500, "max": 1650 },
-      "walkMin": { "min": 10, "max": 22 },
+      "perRoom": { "min": 950, "typical": 1200, "max": 1450 },
+      "walkMin": { "min": 3, "max": 12 },
       "sun": "mixed",
-      "notes": ""
+      "notes": "הכי קרובה/אוריינטציה סטודנטיאלית (3-10 דק'); פרמיית קרבה. דירת 2 חד' ~3,200 ₪"
     },
     "ringelblum": {
       "name": "רינגלבלום",
-      "perRoom": { "min": 1300, "typical": 1450, "max": 1600 },
-      "walkMin": { "min": 12, "max": 25 },
+      "perRoom": { "min": 1000, "typical": 1250, "max": 1500 },
+      "walkMin": { "min": 5, "max": 15 },
       "sun": "exposed",
-      "notes": ""
+      "notes": "סמוך לקמפוס (צד ד'), חלק מהבניינים חדשים יותר; הערכה מעט מעל ממוצע ד'"
     },
     "masada": {
       "name": "מצדה",
-      "perRoom": { "min": 1350, "typical": 1500, "max": 1650 },
-      "walkMin": { "min": 8, "max": 18 },
+      "perRoom": { "min": 900, "typical": 1150, "max": 1400 },
+      "walkMin": { "min": 12, "max": 22 },
       "sun": "mixed",
-      "notes": ""
+      "notes": "רחוב מרכזי ליד המרכז/העיר העתיקה; מלאי מעורב — הערכה קרובה לממוצע העירוני"
     },
     "old-city": {
       "name": "העיר העתיקה",
-      "perRoom": { "min": 1250, "typical": 1450, "max": 1650 },
-      "walkMin": { "min": 10, "max": 20 },
+      "perRoom": { "min": 800, "typical": 1100, "max": 1400 },
+      "walkMin": { "min": 12, "max": 22 },
       "sun": "mixed",
-      "notes": "מבנים ישנים — כדאי לבדוק תחזוקה"
+      "notes": "מבנים ישנים + בתים פרטיים עם חצר; פיזור רחב (לופטים משופצים יקרים יותר) — בדקו תחזוקה"
     }
   },
   "fallback": {
     "name": "סטודנטים בבאר שבע (כללי)",
-    "perRoom": { "min": 1250, "typical": 1500, "max": 1750 },
+    "perRoom": { "min": 900, "typical": 1150, "max": 1400 },
     "walkMin": { "min": 8, "max": 25 }
+  },
+  "feesReference": {
+    "_note": "טווחים אופייניים לעלויות נלוות — לעיון, לא מחייב.",
+    "arnonaMonthly": { "room2_40sqm": [120, 140, 170], "room3_70sqm": [220, 260, 320], "room4_90sqm": [400, 470, 560] },
+    "arnonaNote": "מחושב דו-חודשי; הנחת סטודנט עד ~25% בכפוף לבקשה (ינואר-פברואר).",
+    "vaadBayitMonthly": [0, 80, 200],
+    "deposit": { "monthsTypical": 2, "legalCapMonths": 3, "note": "שוק הסטודנטים בד\"כ 1-2 חודשים + ערבים/צ'קים." }
   }
 }
