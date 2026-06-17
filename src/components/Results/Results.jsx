@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useApp } from '../../stores/appStore.jsx';
 import Ltr from '../Ltr.jsx';
 import { num } from '../../lib/format.js';
+import { shareWhatsApp } from '../../lib/share.js';
 import { UI } from '../../lib/copy.js';
 import ValueScore from './ValueScore.jsx';
 import RiskBadge from './RiskBadge.jsx';
@@ -86,6 +87,18 @@ export default function Results() {
           {UI.checkAnother}
         </button>
       </div>
+      <button
+        type="button"
+        className="btn ghost"
+        style={{ marginTop: 9 }}
+        onClick={() =>
+          shareWhatsApp(
+            `בדקתי דירה בבית הסטודנט והיא קיבלה ${value.score}/100 🚩 תבדקו את שלכם לפני שחותמים:`
+          )
+        }
+      >
+        📤 שתף ניקוד
+      </button>
     </div>
   );
 }
