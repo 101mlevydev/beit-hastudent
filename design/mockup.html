@@ -1,0 +1,502 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>בית הסטודנט — Design Mockup</title>
+<style>
+  /* ===== Design tokens — warm desert "report card": calm, credible, trustworthy ===== */
+  :root{
+    /* warm sand base */
+    --bg:#f3ece1; --bg-2:#efe6d8;
+    --paper:#fffaf3; --paper-2:#fbf3e8; --paper-3:#f6ecdd;
+    --line:#e7dac6; --line-2:#dccab0;
+    --ink:#2e2a24; --muted:#7c715f; --faint:#a99c87;
+    /* desert accent (terracotta / clay) */
+    --clay:#c2683f; --clay-deep:#a8512c; --clay-soft:#f0d8cb;
+    /* value ramp: green -> amber -> red */
+    --good:#3f9d6b; --good-soft:#dcefe2;
+    --mid:#d99a2b;  --mid-soft:#f6e7c6;
+    --bad:#cf4f43;  --bad-soft:#f6dad6;
+    /* risk badge ramp */
+    --calm:#3f9d6b; --warn:#d99a2b; --alarm:#cf4f43;
+    --track:#ece0cf;
+    --r:20px; --r-sm:13px; --r-xs:9px;
+    --font:"Heebo","Assistant","Rubik",system-ui,"Segoe UI",Arial,sans-serif;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,monospace;
+    --shadow:0 1px 2px rgba(74,55,30,.05), 0 14px 30px rgba(120,84,40,.10);
+    --shadow-sm:0 1px 2px rgba(74,55,30,.06), 0 6px 16px rgba(120,84,40,.08);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font);color:var(--ink);
+    background:
+      radial-gradient(1100px 700px at 12% -8%, #faf2e6 0, transparent 55%),
+      radial-gradient(900px 700px at 95% 110%, #f0e2cf 0, transparent 55%),
+      var(--bg);
+    padding:30px 22px 64px;-webkit-font-smoothing:antialiased}
+  .ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+
+  h1.title{text-align:center;margin:0 0 4px;font-size:26px;font-weight:900;letter-spacing:.2px}
+  h1.title .u{color:var(--clay)}
+  p.sub{text-align:center;color:var(--muted);margin:0 auto 6px;font-size:13.5px;max-width:680px;line-height:1.6}
+
+  /* palette legend */
+  .legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:760px;margin:16px auto 30px}
+  .chip{display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);
+    border-radius:999px;padding:7px 13px 7px 11px;font-size:12.5px;font-weight:700;box-shadow:var(--shadow-sm)}
+  .chip i{width:12px;height:12px;border-radius:50%;display:block;box-shadow:0 0 0 3px rgba(255,255,255,.6) inset}
+
+  .gallery{display:flex;flex-wrap:wrap;gap:32px;justify-content:center;align-items:flex-start}
+
+  /* ===== phone frame ===== */
+  .phone{width:312px;border-radius:42px;padding:11px;background:linear-gradient(160deg,#e9dcc8,#d8c4a6);
+    box-shadow:0 2px 0 rgba(255,255,255,.5) inset, 0 26px 54px rgba(120,84,40,.28);border:1px solid #cbb692}
+  .phone .notch{height:22px;display:flex;justify-content:center;align-items:flex-start}
+  .phone .notch::before{content:"";width:104px;height:7px;border-radius:99px;background:#b59f7c;margin-top:5px}
+  .label{font-weight:800;text-align:center;margin:0 0 9px;font-size:12.5px;color:var(--muted);letter-spacing:.2px}
+  .screen{background:linear-gradient(180deg,var(--bg-2),#f5ecdd);border-radius:32px;height:600px;position:relative;
+    overflow:hidden;border:1px solid var(--line-2)}
+  .pad{position:absolute;inset:0;display:flex;flex-direction:column;padding:16px 15px;overflow:hidden}
+
+  /* app top bar */
+  .appbar{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+  .mark{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;
+    background:linear-gradient(165deg,#fff,var(--clay-soft));border:1px solid var(--line-2);box-shadow:var(--shadow-sm)}
+  .appbar .wm{font-weight:900;font-size:15.5px;line-height:1}
+  .appbar .wm small{display:block;font-size:10px;font-weight:700;color:var(--faint);margin-top:2px}
+  .appbar .meta{margin-inline-start:auto;font-size:10px;color:var(--faint);text-align:left;line-height:1.4}
+
+  .btn{border:none;border-radius:15px;padding:14px 16px;font-weight:800;font-family:var(--font);font-size:15.5px;
+    cursor:pointer;width:100%;letter-spacing:.2px}
+  .btn.primary{background:linear-gradient(180deg,#cf7549,var(--clay-deep));color:#fff;
+    box-shadow:0 8px 20px rgba(168,81,44,.32),0 1px 0 rgba(255,255,255,.3) inset}
+  .btn.ghost{background:var(--paper);color:var(--ink);box-shadow:0 0 0 1px var(--line-2) inset}
+  .btn.wa{background:linear-gradient(180deg,#3ec463,#1faa4e);color:#fff;box-shadow:0 8px 20px rgba(31,170,78,.30)}
+  .spacer{flex:1}
+
+  /* ===== 1. FORM ===== */
+  .prog{display:flex;align-items:center;gap:6px;margin-bottom:14px}
+  .prog .bar{flex:1;height:7px;border-radius:99px;background:var(--track);overflow:hidden}
+  .prog .bar i{display:block;height:100%;width:60%;border-radius:99px;background:linear-gradient(90deg,var(--clay),#dd8a5a)}
+  .prog .pc{font-size:11px;font-weight:800;color:var(--muted)}
+  .step-h{font-size:18px;font-weight:900;margin:2px 0 3px}
+  .step-s{font-size:12px;color:var(--muted);margin-bottom:14px}
+  .fieldlabel{font-size:12.5px;font-weight:800;color:var(--ink);margin:13px 2px 7px;display:flex;justify-content:space-between}
+  .fieldlabel small{color:var(--faint);font-weight:700}
+  .hoods{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .hood{background:var(--paper);border:1px solid var(--line-2);border-radius:13px;padding:11px 10px;font-size:13px;font-weight:700;
+    display:flex;align-items:center;gap:7px;box-shadow:var(--shadow-sm)}
+  .hood .e{font-size:15px}
+  .hood.sel{border-color:var(--clay);background:linear-gradient(180deg,#fff,var(--clay-soft));
+    box-shadow:0 0 0 2px rgba(194,104,63,.25),var(--shadow-sm)}
+  .inrow{display:flex;gap:8px}
+  .input{flex:1;background:var(--paper);border:1px solid var(--line-2);border-radius:13px;padding:12px 13px;
+    display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow-sm)}
+  .input .v{font-weight:800;font-size:15px}
+  .input .un{font-size:11px;color:var(--faint);font-weight:700}
+  .seg{display:flex;background:var(--paper-3);border:1px solid var(--line);border-radius:13px;padding:3px;gap:3px}
+  .seg span{flex:1;text-align:center;font-size:12px;font-weight:800;padding:9px 4px;border-radius:10px;color:var(--muted)}
+  .seg span.on{background:var(--paper);color:var(--clay-deep);box-shadow:var(--shadow-sm)}
+  .formnote{font-size:10.5px;color:var(--faint);margin-top:10px;text-align:center}
+
+  /* ===== 2. RESULTS ===== */
+  .reslead{text-align:center;font-size:11.5px;color:var(--muted);margin-bottom:6px}
+  .reslead b{color:var(--ink)}
+  .scorewrap{display:flex;gap:11px;margin-bottom:12px}
+  .dialcard{flex:1.15;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px 10px 12px;
+    text-align:center;box-shadow:var(--shadow)}
+  .dialcard .cap{font-size:11px;font-weight:800;color:var(--muted);margin-bottom:8px}
+  .dial{width:118px;height:118px;border-radius:50%;margin:0 auto;position:relative;
+    background:conic-gradient(var(--mid) 0 64%, var(--track) 64% 100%);
+    box-shadow:0 6px 16px rgba(217,154,43,.22)}
+  .dial::before{content:"";position:absolute;inset:13px;border-radius:50%;background:var(--paper);
+    box-shadow:0 1px 3px rgba(74,55,30,.12) inset}
+  .dial .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .dial .num b{font-size:38px;font-weight:900;line-height:1;color:var(--mid);font-family:var(--mono)}
+  .dial .num span{font-size:10px;color:var(--faint);font-weight:800;margin-top:1px}
+  .verdict{font-size:12.5px;font-weight:800;margin-top:9px;color:var(--mid)}
+  .verdict small{display:block;font-size:10.5px;color:var(--muted);font-weight:600;margin-top:2px;line-height:1.4}
+
+  .riskcard{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px 12px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+  .riskcard .cap{font-size:11px;font-weight:800;color:var(--muted);margin-bottom:10px}
+  .riskbadge{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .riskbadge .ring{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:27px;
+    background:var(--bad-soft);border:2px solid var(--alarm);box-shadow:0 0 0 5px rgba(207,79,67,.10)}
+  .riskbadge .lvl{font-size:17px;font-weight:900;color:var(--alarm)}
+  .riskbadge .sub{font-size:10.5px;color:var(--muted);text-align:center;line-height:1.4}
+
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;margin-bottom:11px;box-shadow:var(--shadow-sm)}
+  .card .ch{font-size:12.5px;font-weight:900;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+  .card .ch .e{font-size:14px}
+
+  /* cost breakdown */
+  .costrow{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:6px 0;border-bottom:1px dashed var(--line)}
+  .costrow span{color:var(--muted)}
+  .costrow b{font-weight:800;font-family:var(--mono)}
+  .costrow.total{border-bottom:none;margin-top:4px;padding-top:9px;border-top:2px solid var(--line-2)}
+  .costrow.total span{color:var(--ink);font-weight:900;font-size:13.5px}
+  .costrow.total b{font-size:17px;color:var(--clay-deep)}
+  .costhint{font-size:10.5px;color:var(--faint);margin-top:7px;text-align:center}
+  .costhint b{color:var(--clay-deep)}
+
+  /* benchmark bar */
+  .bm{position:relative;height:11px;border-radius:99px;margin:26px 4px 8px;
+    background:linear-gradient(90deg,var(--good-soft) 0 28%,var(--mid-soft) 28% 64%,var(--bad-soft) 64% 100%)}
+  .bm .rng{position:absolute;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,#bfe2cc,#f0d59a);
+    left:28%;right:36%;box-shadow:0 0 0 1px rgba(0,0,0,.04) inset}
+  .bm .you{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;background:var(--bad);
+    border:3px solid #fff;box-shadow:0 2px 6px rgba(207,79,67,.5);transform:translate(50%,-50%);right:18%}
+  .bm .youlab{position:absolute;top:-22px;right:11%;font-size:10.5px;font-weight:900;color:var(--bad);white-space:nowrap}
+  .bmscale{display:flex;justify-content:space-between;font-size:10px;color:var(--faint);font-weight:700;margin:0 2px}
+
+  /* red flags */
+  .flag{display:flex;gap:9px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .flag:last-child{border-bottom:none}
+  .flag .sev{width:9px;height:9px;border-radius:50%;margin-top:4px;flex:none;box-shadow:0 0 0 3px rgba(0,0,0,.03)}
+  .flag .sev.h{background:var(--alarm)} .flag .sev.m{background:var(--warn)}
+  .flag .ft b{font-size:12.5px;font-weight:800;display:block}
+  .flag .ft span{font-size:11.5px;color:var(--muted);display:block;margin-top:2px;line-height:1.45}
+  .flag .ft span::before{content:"❯ ";color:var(--clay)}
+
+  .disclaimer{display:flex;gap:7px;align-items:flex-start;background:var(--paper-3);border:1px solid var(--line);
+    border-radius:var(--r-xs);padding:9px 11px;font-size:10.5px;color:var(--muted);line-height:1.5;margin-top:4px}
+  .disclaimer .e{font-size:12px}
+
+  .breakdown{font-size:11.5px;color:var(--clay-deep);font-weight:800;text-align:center;padding:9px;background:var(--paper-2);
+    border:1px solid var(--line);border-radius:var(--r-sm);margin-bottom:11px}
+
+  /* ===== 3. NEGOTIATION ===== */
+  .negintro{font-size:12px;color:var(--muted);text-align:center;line-height:1.55;margin-bottom:13px}
+  .negintro b{color:var(--ink)}
+  .bubblewrap{background:linear-gradient(180deg,#e7ddc9,#ded2bb);border-radius:18px;padding:13px;
+    box-shadow:0 1px 3px rgba(74,55,30,.1) inset}
+  .bubble{background:linear-gradient(180deg,#fff,#f6fbf4);border:1px solid #d7ead9;border-radius:14px 14px 14px 5px;
+    padding:13px 14px;font-size:12.5px;line-height:1.75;box-shadow:var(--shadow-sm);position:relative}
+  .bubble p{margin:0 0 9px}
+  .bubble p:last-child{margin-bottom:0}
+  .bubble .hl{background:#fbeed7;border-radius:5px;padding:0 4px;font-weight:800}
+  .bubble .time{font-size:9.5px;color:var(--faint);text-align:left;margin-top:6px}
+  .negactions{display:flex;flex-direction:column;gap:9px;margin-top:13px}
+  .copied{font-size:11px;font-weight:800;color:var(--good);text-align:center}
+
+  /* ===== 4. SAVED / COMPARE ===== */
+  .savecard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 12px;margin-bottom:9px;
+    display:flex;align-items:center;gap:11px;box-shadow:var(--shadow-sm)}
+  .savecard .mini{width:46px;height:46px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-family:var(--mono);font-weight:900;flex:none}
+  .savecard .mini b{font-size:19px;line-height:1}
+  .savecard .mini span{font-size:8px;font-weight:800}
+  .mini.g{background:var(--good-soft);color:var(--good)} .mini.m{background:var(--mid-soft);color:var(--mid)} .mini.b{background:var(--bad-soft);color:var(--bad)}
+  .savecard .sc-t b{font-size:13.5px;display:block}
+  .savecard .sc-t span{font-size:11px;color:var(--muted);display:block;margin-top:2px}
+  .savecard .sc-r{margin-inline-start:auto;text-align:left}
+  .savecard .sc-r .rb{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:999px}
+  .rb.low{background:var(--good-soft);color:var(--good)} .rb.med{background:var(--mid-soft);color:var(--mid)} .rb.high{background:var(--bad-soft);color:var(--bad)}
+  .savecard .sc-r .cost{font-size:11px;color:var(--muted);margin-top:5px;font-family:var(--mono)}
+
+  /* ===== laptop / compare framing ===== */
+  .laptop{width:760px;max-width:94vw}
+  .lid{background:linear-gradient(160deg,#e6d8c1,#d3bd9c);border:1px solid #c6b08c;border-radius:18px 18px 4px 4px;
+    padding:14px;box-shadow:0 28px 64px rgba(120,84,40,.30)}
+  .base{height:14px;background:linear-gradient(#d8c5a4,#c0a87f);border-radius:0 0 14px 14px;margin:0 auto;width:97%;
+    box-shadow:0 12px 20px rgba(120,84,40,.3)}
+  .base::after{content:"";display:block;width:110px;height:6px;background:#b29873;border-radius:0 0 9px 9px;margin:0 auto}
+  .desk{background:linear-gradient(180deg,#fdf8f0,#f5ecdd);border-radius:11px;min-height:420px;border:1px solid var(--line-2);
+    padding:22px 26px;display:flex;flex-direction:column}
+  .desk-top{display:flex;align-items:center;gap:11px;margin-bottom:18px}
+  .desk-top .mark{width:40px;height:40px;border-radius:13px;font-size:20px}
+  .desk-top .wm{font-size:20px;font-weight:900}
+  .desk-top .wm small{display:block;font-size:11px;color:var(--faint);font-weight:700;margin-top:2px}
+  .desk-top .right{margin-inline-start:auto;display:flex;gap:9px}
+  .desk-top .right .btn{width:auto;padding:10px 16px;font-size:13px}
+  .cmp-h{font-size:16px;font-weight:900;margin-bottom:4px}
+  .cmp-s{font-size:12.5px;color:var(--muted);margin-bottom:16px}
+  table.cmp{width:100%;border-collapse:separate;border-spacing:0 9px}
+  table.cmp th{font-size:11px;color:var(--muted);font-weight:800;text-align:start;padding:0 12px 4px}
+  table.cmp td{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:13px 12px;font-size:13px;vertical-align:middle}
+  table.cmp td:first-child{border-inline-start:1px solid var(--line);border-radius:0 13px 13px 0}
+  table.cmp td:last-child{border-inline-end:1px solid var(--line);border-radius:13px 0 0 13px}
+  table.cmp tr.best td{background:linear-gradient(90deg,var(--good-soft),var(--paper))}
+  table.cmp tr.best td:first-child{box-shadow:inset 4px 0 0 var(--good)}
+  .cmp-hood{font-weight:800}.cmp-hood span{display:block;font-size:10.5px;color:var(--faint);font-weight:600;margin-top:2px}
+  .cmp-score{font-family:var(--mono);font-weight:900;font-size:18px}
+  .cmp-cost{font-family:var(--mono);font-weight:800}
+  .rbsm{font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px}
+  .tag-best{font-size:10px;font-weight:900;color:var(--good);margin-inline-start:6px}
+
+  /* ===== notes + responsive frames ===== */
+  .note{max-width:920px;margin:36px auto 0;background:var(--paper);border:1px solid var(--line);border-radius:16px;
+    padding:18px 22px;color:#5f5546;line-height:1.7;font-size:13px;box-shadow:var(--shadow-sm)}
+  .note b{color:var(--clay-deep)}
+  .frames{display:flex;gap:18px;justify-content:center;align-items:flex-end;margin-top:16px;flex-wrap:wrap}
+  .mini-f{text-align:center;font-size:11px;font-weight:800;color:var(--muted)}
+  .mini-f .scr{background:linear-gradient(180deg,#fff,#f3ead9);border:1px solid var(--line-2);border-radius:10px;margin-top:7px;
+    display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:10px;padding:6px;box-shadow:var(--shadow-sm)}
+  .mini-f.ph .scr{width:98px;height:182px;border-radius:18px}
+  .mini-f.tb .scr{width:158px;height:128px}
+  .mini-f.lp .scr{width:224px;height:132px}
+</style>
+</head>
+<body>
+  <h1 class="title"><span class="u">בית הסטודנט</span> · Visual Mockup</h1>
+  <p class="sub">"כרטיס דירוג" במדבר · רגוע ואמין, לא גימיק · שני ציונים בלתי תלויים · עברית RTL,
+    ₪ ומספרים כאיים LTR · האימוג'י הם placeholders</p>
+
+  <div class="legend">
+    <span class="chip"><i style="background:var(--good)"></i>ערך גבוה · עסקה טובה</span>
+    <span class="chip"><i style="background:var(--mid)"></i>ערך בינוני · אפשר לשפר</span>
+    <span class="chip"><i style="background:var(--bad)"></i>ערך נמוך · סיכון גבוה</span>
+    <span class="chip"><i style="background:var(--clay)"></i>חימר · צבע פעולה</span>
+  </div>
+
+  <div class="gallery">
+
+    <!-- 1. FORM -->
+    <div class="phone">
+      <div class="notch"></div>
+      <p class="label">① טופס — שאלה־שאלה, פרוגרס בר</p>
+      <div class="screen">
+        <div class="pad">
+          <div class="appbar">
+            <div class="mark">🏠</div>
+            <div class="wm">בית הסטודנט<small>בודקים דירה לפני שחותמים</small></div>
+          </div>
+          <div class="prog"><div class="bar"><i></i></div><span class="pc">3 / 5</span></div>
+          <div class="step-h">העלויות החודשיות</div>
+          <div class="step-s">לא רק השכירות — גם מה שמסתתר מתחתיה.</div>
+
+          <div class="fieldlabel">שכונה</div>
+          <div class="hoods">
+            <div class="hood sel"><span class="e">📍</span>שכונה ג'</div>
+            <div class="hood"><span class="e">📍</span>שכונה ד'</div>
+            <div class="hood"><span class="e">📍</span>רינגלבלום</div>
+            <div class="hood"><span class="e">📍</span>מצדה</div>
+            <div class="hood"><span class="e">📍</span>העיר העתיקה</div>
+            <div class="hood"><span class="e">❓</span>אחר</div>
+          </div>
+
+          <div class="fieldlabel">שכר דירה <small>חודשי</small></div>
+          <div class="inrow">
+            <div class="input"><span class="v"><span class="ltr">3,400</span></span><span class="un">₪ / חודש</span></div>
+          </div>
+          <div class="fieldlabel">ארנונה <small>חלק הדייר</small><span></span></div>
+          <div class="inrow">
+            <div class="input"><span class="v"><span class="ltr">250</span></span><span class="un">₪ / חודש</span></div>
+            <div class="input"><span class="v">ועד בית</span><span class="un"><span class="ltr">120</span> ₪</span></div>
+          </div>
+          <div class="fieldlabel">מרוהטת?</div>
+          <div class="seg"><span>מרוהטת</span><span>חלקי</span><span class="on">לא מרוהטת</span></div>
+
+          <div class="spacer"></div>
+          <div class="formnote">פרטים נוספים בשלבים הבאים — קומה, מעלית, פיקדון, מרחק מהקמפוס</div>
+          <button class="btn primary" style="margin-top:11px">המשך ›</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. RESULTS -->
+    <div class="phone">
+      <div class="notch"></div>
+      <p class="label">② תוצאה — ציון ערך + רמת סיכון</p>
+      <div class="screen">
+        <div class="pad" style="overflow-y:auto">
+          <div class="appbar">
+            <div class="mark">🏠</div>
+            <div class="wm">שכונה ג'<small>2 חד' · קומה 4 · ללא מעלית</small></div>
+            <div class="meta">נתונים<br>מעודכן ל-06/2026</div>
+          </div>
+
+          <div class="reslead">הדירה ב<b>שכונה ג'</b> · <span class="ltr">2</span> חדרים</div>
+          <div class="scorewrap">
+            <div class="dialcard">
+              <div class="cap">ציון ערך</div>
+              <div class="dial"><div class="num"><b>64</b><span>מתוך 100</span></div></div>
+              <div class="verdict">סביר — אפשר לנסות לשפר.<small>המחיר בסדר, אבל הקומה והמרחק מורידים.</small></div>
+            </div>
+            <div class="riskcard">
+              <div class="cap">רמת סיכון</div>
+              <div class="riskbadge">
+                <div class="ring">⚠️</div>
+                <div class="lvl">גבוה</div>
+                <div class="sub">בתנאי העסקה<br>יש דגלים אדומים</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="breakdown">איפה ירד הערך? ❯ פתחו לפירוט מלא</div>
+
+          <div class="card">
+            <div class="ch"><span class="e">🧾</span>עלות חודשית אמיתית</div>
+            <div class="costrow"><span>שכר דירה</span><b><span class="ltr">3,400</span> ₪</b></div>
+            <div class="costrow"><span>ארנונה</span><b><span class="ltr">250</span> ₪</b></div>
+            <div class="costrow"><span>ועד בית</span><b><span class="ltr">120</span> ₪</b></div>
+            <div class="costrow total"><span>סה"כ בפועל</span><b><span class="ltr">3,770</span> ₪</b></div>
+            <div class="costhint">לא <span class="ltr">3,400</span> ₪ — בפועל <b><span class="ltr">3,770</span> ₪</b> בחודש</div>
+          </div>
+
+          <div class="card">
+            <div class="ch"><span class="e">📊</span>מחיר לחדר מול השכונה</div>
+            <div class="bm">
+              <div class="rng"></div>
+              <div class="youlab">אתם · <span class="ltr">1,885</span> ₪</div>
+              <div class="you"></div>
+            </div>
+            <div class="bmscale"><span><span class="ltr">1,400</span></span><span>טווח מקובל</span><span><span class="ltr">1,750</span></span></div>
+            <div class="costhint" style="margin-top:9px"><span class="ltr">1,885</span> ₪ לחדר — <b>מעל הטווח</b> בשכונה ג'</div>
+          </div>
+
+          <div class="card">
+            <div class="ch"><span class="e">🚩</span>דגלים אדומים — שאלות לשאול</div>
+            <div class="flag"><span class="sev h"></span><div class="ft"><b>פיקדון של 3 חודשים, לפני חתימה</b><span>בקשו לעגן את גובה ומועד החזר הפיקדון בחוזה.</span></div></div>
+            <div class="flag"><span class="sev h"></span><div class="ft"><b>תשלום במזומן בלבד</b><span>בקשו העברה בנקאית וקבלה על כל תשלום.</span></div></div>
+            <div class="flag"><span class="sev m"></span><div class="ft"><b>לחץ לסגור היום</b><span>קחו זמן לעבור על החוזה — לחץ הוא דגל אדום.</span></div></div>
+            <div class="disclaimer"><span class="e">⚖️</span><div>מדריך זהירות — <b>אינו ייעוץ משפטי או פיננסי</b>. אלו שאלות לבדוק מול בעל הדירה, לא קביעה על אדם או מודעה.</div></div>
+          </div>
+
+          <button class="btn primary">✍️ כתוב לי הודעה למשא ומתן</button>
+          <button class="btn ghost" style="margin-top:9px">שמור דירה · בדוק דירה אחרת</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. NEGOTIATION -->
+    <div class="phone">
+      <div class="notch"></div>
+      <p class="label">③ הודעת משא ומתן — מוכנה לשליחה</p>
+      <div class="screen">
+        <div class="pad">
+          <div class="appbar">
+            <div class="mark">💬</div>
+            <div class="wm">ההודעה שלך<small>מנוסחת מהנתונים — לא AI</small></div>
+          </div>
+          <div class="negintro">ניסחנו בשבילך הודעה <b>מנומסת אבל לא נאיבית</b>, עם המספרים של השכונה בפנים. מוכנה לשליחה כמו שהיא.</div>
+
+          <div class="bubblewrap">
+            <div class="bubble">
+              <p>היי 🙂 ראיתי את המודעה לדירה בשכונה ג' ומאוד התעניינתי.</p>
+              <p>עשיתי קצת שיעורי בית — טווח השכירות המקובל באזור הוא בערך <span class="hl"><span class="ltr">1,400–1,750</span> ₪ לחדר</span>, וכאן עם הארנונה וועד הבית זה יוצא בערך <span class="hl"><span class="ltr">1,885</span> ₪ לחדר</span>, מעט מעל הטווח.</p>
+              <p>בנוסף, מדובר בקומה 4 ללא מעלית. אשמח אם נוכל לדבר על <span class="hl"><span class="ltr">3,500</span> ₪</span> לחודש.</p>
+              <p>ולגבי הפיקדון — אשמח לעגן בחוזה את גובהו ואת מועד ההחזר. תודה!</p>
+              <div class="time">מוכן להעתקה · <span class="ltr">11:42</span></div>
+            </div>
+          </div>
+
+          <div class="negactions">
+            <button class="btn primary">📋 העתק הודעה</button>
+            <div class="copied">✓ הועתק — אפשר להדביק בוואטסאפ</div>
+            <button class="btn wa">שלח בוואטסאפ</button>
+          </div>
+          <div class="disclaimer" style="margin-top:12px"><span class="e">⚖️</span><div>מדריך זהירות — <b>אינו ייעוץ משפטי</b>. נוסח לעריכה חופשית לפני שליחה.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. SAVED -->
+    <div class="phone">
+      <div class="notch"></div>
+      <p class="label">④ הדירות שלי — שמירה והשוואה</p>
+      <div class="screen">
+        <div class="pad">
+          <div class="appbar">
+            <div class="mark">🗂️</div>
+            <div class="wm">הדירות שלי<small>3 דירות שמורות</small></div>
+          </div>
+
+          <div class="savecard">
+            <div class="mini b"><b>64</b><span>ערך</span></div>
+            <div class="sc-t"><b>שכונה ג'</b><span>2 חד' · קומה 4 · <span class="ltr">9</span> דק' הליכה</span></div>
+            <div class="sc-r"><span class="rb high">סיכון גבוה</span><div class="cost"><span class="ltr">3,770</span> ₪</div></div>
+          </div>
+          <div class="savecard">
+            <div class="mini m"><b>71</b><span>ערך</span></div>
+            <div class="sc-t"><b>מצדה</b><span>3 חד' · קומה 2 · <span class="ltr">14</span> דק' הליכה</span></div>
+            <div class="sc-r"><span class="rb med">סיכון בינוני</span><div class="cost"><span class="ltr">4,250</span> ₪</div></div>
+          </div>
+          <div class="savecard">
+            <div class="mini g"><b>83</b><span>ערך</span></div>
+            <div class="sc-t"><b>שכונה ד'</b><span>2 חד' · קומה 1 · <span class="ltr">12</span> דק' הליכה</span></div>
+            <div class="sc-r"><span class="rb low">סיכון נמוך</span><div class="cost"><span class="ltr">3,300</span> ₪</div></div>
+          </div>
+
+          <div class="disclaimer" style="margin-top:6px"><span class="e">💡</span><div>במסך רחב יותר הדירות נפרשות זו לצד זו בטבלת השוואה.</div></div>
+
+          <div class="spacer"></div>
+          <button class="btn primary">⚖️ השווה את הדירות</button>
+          <button class="btn ghost" style="margin-top:9px">+ בדוק דירה חדשה</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- laptop / compare framing -->
+  <div style="display:flex;justify-content:center;margin-top:40px">
+    <div class="laptop">
+      <p class="label">💻 מסך רחב (לפטופ) — טבלת השוואה, כאן זה זורח</p>
+      <div class="lid">
+        <div class="desk">
+          <div class="desk-top">
+            <div class="mark">🏠</div>
+            <div class="wm">בית הסטודנט<small>השוואת דירות</small></div>
+            <div class="right">
+              <button class="btn ghost">+ דירה חדשה</button>
+              <button class="btn primary">✍️ הודעה לדירה המובילה</button>
+            </div>
+          </div>
+          <div class="cmp-h">שלוש דירות, מבט אחד</div>
+          <div class="cmp-s">ערך, סיכון, עלות חודשית אמיתית ומרחק מהקמפוס — זו לצד זו.</div>
+          <table class="cmp">
+            <thead><tr><th>דירה</th><th>ציון ערך</th><th>רמת סיכון</th><th>עלות אמיתית / חודש</th><th>מרחק לקמפוס</th><th>מחיר לחדר</th></tr></thead>
+            <tbody>
+              <tr class="best">
+                <td class="cmp-hood">שכונה ד' <span class="tag-best">★ הכי משתלמת</span><span>2 חד' · קומה 1 · מרוהטת חלקית</span></td>
+                <td><span class="cmp-score" style="color:var(--good)">83</span></td>
+                <td><span class="rbsm" style="background:var(--good-soft);color:var(--good)">נמוך</span></td>
+                <td class="cmp-cost"><span class="ltr">3,300</span> ₪</td>
+                <td><span class="ltr">12</span> דק'</td>
+                <td><span class="ltr">1,650</span> ₪</td>
+              </tr>
+              <tr>
+                <td class="cmp-hood">מצדה<span>3 חד' · קומה 2 · לא מרוהטת</span></td>
+                <td><span class="cmp-score" style="color:var(--mid)">71</span></td>
+                <td><span class="rbsm" style="background:var(--mid-soft);color:var(--mid)">בינוני</span></td>
+                <td class="cmp-cost"><span class="ltr">4,250</span> ₪</td>
+                <td><span class="ltr">14</span> דק'</td>
+                <td><span class="ltr">1,417</span> ₪</td>
+              </tr>
+              <tr>
+                <td class="cmp-hood">שכונה ג'<span>2 חד' · קומה 4 · ללא מעלית</span></td>
+                <td><span class="cmp-score" style="color:var(--bad)">64</span></td>
+                <td><span class="rbsm" style="background:var(--bad-soft);color:var(--bad)">גבוה</span></td>
+                <td class="cmp-cost"><span class="ltr">3,770</span> ₪</td>
+                <td><span class="ltr">9</span> דק'</td>
+                <td><span class="ltr">1,885</span> ₪</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="disclaimer" style="margin-top:auto;max-width:520px"><span class="e">⚖️</span><div>מדריך זהירות — <b>אינו ייעוץ משפטי או פיננסי</b>. הטווחים מקומיים ומשוערים, לעיון בלבד.</div></div>
+        </div>
+      </div>
+      <div class="base"></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>הערות עיצוב:</b> בסיס "כרטיס דירוג" במדבר — חול חם וחימר — שנועד להרגיש <b>אמין ורגוע</b>, לא
+    גימיק. <b>שני ציונים בלתי תלויים</b>: ציון ערך (חוגה <b>ירוק→ענבר→אדום</b>, 0–100) ורמת סיכון
+    (תג רגוע→מתריע). דירה במחיר הוגן עם תנאים מפוקפקים = <b>ערך סביר, סיכון גבוה</b> — מספר אחד היה
+    מסתיר את זה. ה<b>עלות החודשית האמיתית</b> (שכירות + ארנונה + ועד בית) היא רגע ה"רגע, זה לא 3,400
+    אלא 3,770". הדגלים האדומים מנוסחים כ<b>שאלות לשאול</b>, אף פעם לא כהאשמה, ולצידם תמיד
+    "<b>אינו ייעוץ משפטי</b>". רגע ה־wow: <b>הודעת המשא ומתן לוואטסאפ</b> — הרכבת תבניות עברית (ללא
+    AI), העתקה בנגיעה אחת + <span class="ltr">wa.me</span>. עברית RTL מלאה, ₪ / מספרים / קישורים
+    נשארים LTR. הכל client-side, ללא שרת, ללא תשלום. האימוג'י הם placeholders לאיורי וקטור.
+    <div class="frames">
+      <div class="mini-f ph">📱 טלפון (ראשי)<div class="scr">טופס שאלה־שאלה · שני ציונים מעל הקיפול</div></div>
+      <div class="mini-f tb">📱 טאבלט<div class="scr">אותו ממשק · הדבקת טקסט מודעה נוחה</div></div>
+      <div class="mini-f lp">💻 לפטופ<div class="scr">טבלת השוואה רב-טורית · הקרנה</div></div>
+    </div>
+  </div>
+
+</body>
+</html>
