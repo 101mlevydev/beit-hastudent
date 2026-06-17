@@ -3,9 +3,11 @@ import { APP } from './lib/copy.js';
 import Form from './components/Form/Form.jsx';
 import Results from './components/Results/Results.jsx';
 import NegotiationCard from './components/Negotiation/NegotiationCard.jsx';
+import SavedList from './components/Saved/SavedList.jsx';
+import CompareTable from './components/Saved/CompareTable.jsx';
 
 function Shell() {
-  const { screen, refsLoading, refsError } = useApp();
+  const { screen, refsLoading, refsError, saved, goto } = useApp();
 
   if (refsError) {
     return (
@@ -29,19 +31,36 @@ function Shell() {
     );
   }
 
+  const ownsHeader = screen === 'saved' || screen === 'compare';
+  const wide = screen === 'compare';
+
   return (
-    <div className="app-shell">
-      <header className="appbar">
-        <div className="mark" aria-hidden="true">🏠</div>
-        <div className="wm">
-          {APP.name}
-          <small>{APP.tagline}</small>
-        </div>
-      </header>
+    <div className={`app-shell${wide ? ' wide' : ''}`}>
+      {!ownsHeader && (
+        <header className="appbar">
+          <div className="mark" aria-hidden="true">🏠</div>
+          <div className="wm">
+            {APP.name}
+            <small>{APP.tagline}</small>
+          </div>
+          {saved.length > 0 && (
+            <button
+              type="button"
+              className="appbar-saved"
+              onClick={() => goto('saved')}
+              aria-label={`הדירות שלי, ${saved.length} שמורות`}
+            >
+              🗂️ <span className="ltr">{saved.length}</span>
+            </button>
+          )}
+        </header>
+      )}
       <main className="screen-host">
         {screen === 'form' && <Form />}
         {screen === 'results' && <Results />}
         {screen === 'negotiation' && <NegotiationCard />}
+        {screen === 'saved' && <SavedList />}
+        {screen === 'compare' && <CompareTable />}
       </main>
     </div>
   );

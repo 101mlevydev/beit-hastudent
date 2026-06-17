@@ -1,6 +1,6 @@
 # Step 10 — Save & compare (localStorage)
 
-**Phase:** UI · **Status:** todo · **Depends on:** 08
+**Phase:** UI · **Status:** done · **Depends on:** 08
 
 ## Goal
 Persist and line up multiple listings — value, risk, true monthly cost, and commute side by side
