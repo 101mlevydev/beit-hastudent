@@ -1,6 +1,6 @@
 # Step 05 — Scoring engine — value + risk + red-flags (headless rubric)
 
-**Phase:** Engine · **Status:** todo · **Depends on:** 04
+**Phase:** Engine · **Status:** done · **Depends on:** 04
 
 ## Goal
 The technical heart: a pure, deterministic, JSON-tunable **rubric** that produces both scores +
