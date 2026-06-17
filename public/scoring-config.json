@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "_note": "The tunable 'feel' of both scores. Every number that shapes the value curve or the risk bands lives here — balancing is a data edit, not a code change. PLACEHOLDER values pending the Step 12 re-balance against the engine fixtures.",
+  "baseValue": 70,
+  "price": {
+    "belowMinBonus": 14,
+    "withinRange": 0,
+    "abovePerPct": -0.8,
+    "maxPricePenalty": -26,
+    "belowGoodPerPct": 0.5,
+    "maxBelowBonus": 18,
+    "tooLowFlagPct": 0.25
+  },
+  "distance": {
+    "freeUntilMin": 10,
+    "perMinAfter": -0.8,
+    "maxPenalty": -16,
+    "closeBonusUnderMin": 7,
+    "closeBonus": 5
+  },
+  "floor": {
+    "perFloorAbove2": -1,
+    "topFloorPenalty": -6,
+    "noElevatorFrom": 3,
+    "noElevatorPenalty": -6
+  },
+  "furnished": {
+    "full": 6,
+    "partial": 3,
+    "none": 0
+  },
+  "valueBands": [
+    { "max": 40, "band": "bad", "verdict": "עדיף לוותר." },
+    { "max": 70, "band": "mid", "verdict": "סביר — אפשר לנסות לשפר." },
+    { "max": 100, "band": "good", "verdict": "עסקה טובה." }
+  ],
+  "redFlags": {
+    "severityWeight": { "high": 10, "medium": 5, "low": 2 },
+    "maxRiskPoints": 40
+  },
+  "riskBands": [
+    { "max": 5, "level": "low" },
+    { "max": 15, "level": "med" },
+    { "max": 999, "level": "high" }
+  ]
+}

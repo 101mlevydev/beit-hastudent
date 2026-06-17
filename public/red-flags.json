@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "_note": "Declarative red-flag rules. A generic matcher in lib/engine/redFlags.js evaluates these triggers — no rule logic lives in code. Each flag is worded as a QUESTION TO ASK, never an accusation. PLACEHOLDER phrasing pending the Step 12 native-Hebrew review.",
+  "items": [
+    {
+      "code": "deposit_high",
+      "trigger": { "depositMonthsGte": 3 },
+      "label": "פיקדון גבוה (3 חודשים ומעלה)",
+      "ask": "בקשו לעגן בחוזה את גובה הפיקדון ואת מועד ההחזר המלא בסוף השכירות.",
+      "severity": "high"
+    },
+    {
+      "code": "deposit_early",
+      "trigger": { "depositTiming": "before_viewing" },
+      "label": "פיקדון נדרש עוד לפני שראיתם את הדירה",
+      "ask": "אל תעבירו כסף לפני שראיתם את הדירה בעיניים וחתמתם על חוזה.",
+      "severity": "high"
+    },
+    {
+      "code": "cash_only",
+      "trigger": { "checklist": "cashOnly", "adAny": ["מזומן בלבד", "רק מזומן"] },
+      "label": "תשלום במזומן בלבד",
+      "ask": "בקשו לשלם בהעברה בנקאית ולקבל קבלה על כל תשלום.",
+      "severity": "high"
+    },
+    {
+      "code": "no_contract",
+      "trigger": { "checklist": "noContract", "adAny": ["ללא חוזה", "בלי חוזה"] },
+      "label": "ללא חוזה שכירות כתוב",
+      "ask": "התעקשו על חוזה שכירות כתוב וחתום לפני כל תשלום.",
+      "severity": "high"
+    },
+    {
+      "code": "no_receipts",
+      "trigger": { "checklist": "noReceipts" },
+      "label": "אין קבלות על תשלומים",
+      "ask": "בקשו קבלה מסודרת על דמי השכירות והפיקדון — זו ההוכחה שלכם.",
+      "severity": "medium"
+    },
+    {
+      "code": "refuses_viewing",
+      "trigger": { "checklist": "refusesViewing", "adAny": ["בלי לראות", "אי אפשר לראות"] },
+      "label": "סירוב להראות את הדירה לפני סגירה",
+      "ask": "בקשו לראות את הדירה עצמה — לא רק תמונות — לפני שמתחייבים.",
+      "severity": "high"
+    },
+    {
+      "code": "pressure",
+      "trigger": { "checklist": "pressureToCloseToday", "adAny": ["מיידי", "חייב לסגור היום", "יש המון מתעניינים", "נחטף"] },
+      "label": "לחץ לסגור מהר",
+      "ask": "קחו זמן לעבור על התנאים בנחת — לחץ לסגור 'עכשיו' הוא דגל אדום.",
+      "severity": "medium"
+    },
+    {
+      "code": "too_good",
+      "trigger": { "priceBelowPct": 0.25 },
+      "label": "מחיר נמוך בצורה חריגה מהמקובל",
+      "ask": "מחיר טוב מדי? ודאו שהדירה והבעלים אמיתיים לפני כל תשלום.",
+      "severity": "medium"
+    }
+  ]
+}

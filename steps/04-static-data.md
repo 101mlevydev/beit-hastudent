@@ -1,6 +1,6 @@
 # Step 04 — Static data (benchmarks · scoring-config · red-flags)
 
-**Phase:** Content · **Status:** todo · **Depends on:** 02
+**Phase:** Content · **Status:** done · **Depends on:** 02
 
 ## Goal
 Populate the three static JSON catalogs — the reference "database" + the tunable feel — with
