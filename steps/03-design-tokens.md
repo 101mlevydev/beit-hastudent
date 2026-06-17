@@ -1,6 +1,6 @@
 # Step 03 — Design tokens + RTL base (desert report-card system)
 
-**Phase:** Setup · **Status:** todo · **Depends on:** 02
+**Phase:** Setup · **Status:** done · **Depends on:** 02
 
 ## Goal
 Encode the approved mockup into reusable tokens; set the RTL base; bundle fonts locally (no CDN).

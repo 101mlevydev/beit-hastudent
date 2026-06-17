@@ -1,6 +1,6 @@
 # Step 02 — Scaffold (Vite + React) + git + env check
 
-**Phase:** Setup · **Status:** todo · **Depends on:** 01 approved
+**Phase:** Setup · **Status:** done · **Depends on:** 01 approved
 
 ## Goal
 A running Vite + React 18 skeleton on a git branch (ARCHITECTURE §2, §10).
