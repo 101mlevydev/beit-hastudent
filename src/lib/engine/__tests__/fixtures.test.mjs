@@ -142,5 +142,32 @@ check('unknown area resolves to fallback + approximate:true', () => {
   assert.ok(re.meta.hoodName.includes('כללי'));
 });
 
+// ----------------------------------------------------------------------------
+// Negotiation script (step 06) — findings-aware template assembly, no AI.
+// Assert each message cites the right numbers and selects the right clauses.
+// ----------------------------------------------------------------------------
+console.log('\n— Negotiation scripts —');
+
+console.log('\nA (over-range + floor + deposit + cash):\n' + ra.negotiationScript + '\n');
+check('A: cites the local range', () => assert.ok(ra.negotiationScript.includes('1,400–1,750')));
+check('A: cites the true per-room', () => assert.ok(ra.negotiationScript.includes('1,885')));
+check('A: makes a counter-offer below current rent', () => assert.ok(/₪3,1\d0/.test(ra.negotiationScript)));
+check('A: mentions floor 4 no-elevator', () => assert.ok(ra.negotiationScript.includes('קומה 4 ללא מעלית')));
+check('A: includes a deposit request', () => assert.ok(ra.negotiationScript.includes('פיקדון')));
+
+console.log('\nB (great deal — should NOT haggle):\n' + rb.negotiationScript + '\n');
+check('B: no counter-offer (price is fair)', () => assert.ok(!/לדבר על שכר דירה/.test(rb.negotiationScript)));
+check('B: no deposit clause (clean terms)', () => assert.ok(!rb.negotiationScript.includes('פיקדון')));
+check('B: stays short & warm (<= 3 paragraphs)', () => assert.ok(rb.negotiationScript.split('\n\n').length <= 3));
+
+console.log('\nD (within-range price + many term flags):\n' + rd.negotiationScript + '\n');
+check('D: no price/range clause (within range)', () => assert.ok(!rd.negotiationScript.includes('שיעורי בית')));
+check('D: mentions written contract', () => assert.ok(rd.negotiationScript.includes('חוזה')));
+check('D: mentions bank transfer over cash', () => assert.ok(rd.negotiationScript.includes('העברה בנקאית')));
+check('D: deterministic (same result → same text)', () => {
+  const again = scoreListing(trap, refs).negotiationScript;
+  assert.equal(again, rd.negotiationScript);
+});
+
 console.log(`\n${fail === 0 ? '✅' : '❌'} engine fixtures: ${pass} passed, ${fail} failed\n`);
 process.exit(fail === 0 ? 0 : 1);

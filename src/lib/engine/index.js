@@ -7,7 +7,7 @@
 
 import { valueScore } from './value.js';
 import { riskScore } from './risk.js';
-// buildNegotiationScript is wired in step 06 (the signature feature).
+import { buildNegotiationScript } from './negotiation.js';
 
 /**
  * Resolve the neighborhood's per-room range. Unknown / "other" → city fallback,
@@ -39,7 +39,7 @@ export function scoreListing(input, refs) {
   const result = {
     value,
     risk,
-    negotiationScript: '', // filled by the negotiation generator (step 06)
+    negotiationScript: '',
     meta: {
       dataDate: benchmarks.dataDate,
       approximate,
@@ -47,5 +47,7 @@ export function scoreListing(input, refs) {
     },
   };
 
+  // Attach the findings-aware WhatsApp script (pure template assembly, no AI).
+  result.negotiationScript = buildNegotiationScript(result, input, refs);
   return result;
 }

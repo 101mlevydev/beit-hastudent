@@ -1,6 +1,6 @@
 # Step 06 — Negotiation-script generator (templates, headless)
 
-**Phase:** Engine · **Status:** todo · **Depends on:** 05
+**Phase:** Engine · **Status:** done · **Depends on:** 05
 
 ## Goal
 The **signature feature**, built headless and pure: a findings-aware, polite-but-firm, **sendable**
