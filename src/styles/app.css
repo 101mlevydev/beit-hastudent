@@ -699,3 +699,33 @@ table.cmp tr.best td:first-child { box-shadow: inset 4px 0 0 var(--good); }
   }
   .prog .bar i { transition: none; }
 }
+
+/* ---------- suite cross-promo footer (landing) ---------- */
+.suite-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 10px;
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+.suite-label { font-weight: 600; }
+.suite-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; }
+.suite-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 12px;
+  white-space: nowrap;
+}
+a.suite-pill { transition: border-color .15s, color .15s; }
+a.suite-pill:hover { border-color: var(--clay); color: var(--clay-deep); }
+.suite-pill.is-inert { opacity: .5; cursor: default; }

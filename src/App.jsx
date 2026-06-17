@@ -5,6 +5,7 @@ import Results from './components/Results/Results.jsx';
 import NegotiationCard from './components/Negotiation/NegotiationCard.jsx';
 import SavedList from './components/Saved/SavedList.jsx';
 import CompareTable from './components/Saved/CompareTable.jsx';
+import SuiteFooter from './components/SuiteFooter.jsx';
 
 function Shell() {
   const { screen, refsLoading, refsError, saved, goto } = useApp();
@@ -63,6 +64,7 @@ function Shell() {
         {screen === 'saved' && <SavedList />}
         {screen === 'compare' && <CompareTable />}
       </main>
+      {screen === 'form' && <SuiteFooter />}
     </div>
   );
 }
