@@ -500,7 +500,7 @@ button { font-family: var(--font); }
   height: 16px;
   border-radius: 50%;
   border: 3px solid #fff;
-  transform: translate(50%, -50%);
+  transform: translate(-50%, -50%);
 }
 .bm .you.below { background: var(--good); box-shadow: 0 2px 6px rgba(63, 157, 107, 0.5); }
 .bm .you.within { background: var(--mid); box-shadow: 0 2px 6px rgba(217, 154, 43, 0.5); }
@@ -511,7 +511,7 @@ button { font-family: var(--font); }
   font-size: 10.5px;
   font-weight: 900;
   white-space: nowrap;
-  transform: translateX(50%);
+  transform: translateX(-50%);
 }
 .bm .youlab.below { color: var(--good); }
 .bm .youlab.within { color: var(--mid); }

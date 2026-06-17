@@ -1,9 +1,10 @@
 import { AppProvider, useApp } from './stores/appStore.jsx';
 import { APP } from './lib/copy.js';
 import Form from './components/Form/Form.jsx';
+import Results from './components/Results/Results.jsx';
 
 function Shell() {
-  const { screen, refsLoading, refsError, result } = useApp();
+  const { screen, refsLoading, refsError } = useApp();
 
   if (refsError) {
     return (
@@ -38,13 +39,7 @@ function Shell() {
       </header>
       <main className="screen-host">
         {screen === 'form' && <Form />}
-        {screen === 'results' && (
-          <pre style={{ whiteSpace: 'pre-wrap', fontSize: 12, direction: 'ltr' }}>
-            {JSON.stringify(result?.value, null, 2)}
-            {'\n\n'}
-            {result?.negotiationScript}
-          </pre>
-        )}
+        {screen === 'results' && <Results />}
       </main>
     </div>
   );

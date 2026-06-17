@@ -1,6 +1,6 @@
 # Step 08 — Results screen — dual score + cost reveal + benchmark + flags
 
-**Phase:** UI · **Status:** todo · **Depends on:** 07
+**Phase:** UI · **Status:** done · **Depends on:** 07
 
 ## Goal
 The credible reveal: **both scores** + the hidden-cost reveal + benchmark + red-flags — **all
