@@ -1,6 +1,6 @@
 # Step 11 — Responsive + motion polish (phone / tablet / laptop)
 
-**Phase:** Polish · **Status:** todo · **Depends on:** 09, 10
+**Phase:** Polish · **Status:** done · **Depends on:** 09, 10
 
 ## Goal
 Flawless across phone / tablet / laptop, with the desert report-card motion that earns the

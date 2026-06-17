@@ -680,13 +680,15 @@ table.cmp tr.best td:first-child { box-shadow: inset 4px 0 0 var(--good); }
 }
 @media (min-width: 1024px) {
   .app-shell.wide { max-width: 1040px; }
-  .results-grid {
+  .app-shell.res { max-width: 860px; }
+  /* Results widens to a two-column card grid on laptop; phone stays single col. */
+  .app-shell.res .results-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 11px;
     align-items: start;
   }
-  .results-grid .full { grid-column: 1 / -1; }
+  .app-shell.res .scorewrap { max-width: 520px; margin-inline: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {

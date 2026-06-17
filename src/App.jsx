@@ -32,10 +32,11 @@ function Shell() {
   }
 
   const ownsHeader = screen === 'saved' || screen === 'compare';
-  const wide = screen === 'compare';
+  const shellClass =
+    screen === 'compare' ? ' wide' : screen === 'results' ? ' res' : '';
 
   return (
-    <div className={`app-shell${wide ? ' wide' : ''}`}>
+    <div className={`app-shell${shellClass}`}>
       {!ownsHeader && (
         <header className="appbar">
           <div className="mark" aria-hidden="true">🏠</div>

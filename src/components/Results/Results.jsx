@@ -63,14 +63,15 @@ export default function Results() {
 
       <Breakdown breakdown={value.breakdown} />
 
-      <CostBreakdown
-        rent={Number(input.rentILS) || 0}
-        arnona={Number(input.arnonaILS) || 0}
-        vaad={Number(input.vaadBayitILS) || 0}
-        total={value.costMonthly}
-      />
-
-      <BenchmarkBar perRoom={value.perRoom} benchmark={value.benchmark} hoodName={meta.hoodName} />
+      <div className="results-grid">
+        <CostBreakdown
+          rent={Number(input.rentILS) || 0}
+          arnona={Number(input.arnonaILS) || 0}
+          vaad={Number(input.vaadBayitILS) || 0}
+          total={value.costMonthly}
+        />
+        <BenchmarkBar perRoom={value.perRoom} benchmark={value.benchmark} hoodName={meta.hoodName} />
+      </div>
 
       <RedFlagsList flags={risk.flags} />
 
