@@ -1,6 +1,6 @@
 # Step 12 — Content & copy gate (benchmarks + Hebrew script) ⛔ APPROVAL
 
-**Phase:** Gate · **Status:** todo · **Depends on:** 11
+**Phase:** Gate · **Status:** awaiting-approval (artifact drafted; needs owner/native review) · **Depends on:** 11
 
 ## Goal
 The data must be credible and **all Hebrew must read as a real, savvy student — never as AI**
