@@ -20,7 +20,8 @@ function buildSubline(value) {
     return value.band === 'good' ? 'מחיר טוב והתנאים מאוזנים.' : 'אין מורידים בולטים.';
   }
   const names = negs.slice(0, 2).map((b) => NEG_NAME[b.factor] || b.factor);
-  return `${names.join(' ו')} מורידים את הערך.`;
+  const verb = names.length > 1 ? 'מורידים' : 'מוריד';
+  return `${names.join(' ו')} ${verb} את הערך.`;
 }
 
 function propertySummary(input) {

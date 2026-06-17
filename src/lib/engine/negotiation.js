@@ -45,9 +45,11 @@ export function buildNegotiationScript(result, input, refs) {
   let counterRent = null;
   if (bm.position === 'above') {
     // homework line: cite the local range + the TRUE per-room (incl. arnona+vaad)
+    const pctOver = bm.max > 0 ? (value.perRoom - bm.max) / bm.max : 0;
+    const overTxt = pctOver > 0.4 ? 'הרבה מעל הטווח' : pctOver > 0.15 ? 'מעל הטווח' : 'מעט מעל הטווח';
     paras.push(
       `עשיתי קצת שיעורי בית — טווח השכירות המקובל ב${hood} הוא בערך ₪${range(bm.min, bm.max)} לחדר, ` +
-      `וכאן עם הארנונה וועד הבית זה יוצא בערך ₪${num(value.perRoom)} לחדר — מעט מעל הטווח.`
+      `וכאן עם הארנונה וועד הבית זה יוצא בערך ₪${num(value.perRoom)} לחדר — ${overTxt}.`
     );
     // counter-offer: nudge the rent so the per-room lands at the top of the range
     const targetRent = round50(bm.max * rooms - arnona - vaad);
