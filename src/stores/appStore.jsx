@@ -8,6 +8,7 @@
 import { createContext, useContext, useEffect, useMemo, useReducer, useState } from 'react';
 import { loadRefs, walkPrefill } from './refStore.js';
 import { scoreListing } from '../lib/engine/index.js';
+import { parseAdText } from '../lib/engine/adParser.js';
 import * as store from '../lib/persistence.js';
 
 const AppCtx = createContext(null);
@@ -44,6 +45,12 @@ function reducer(state, action) {
           checklist: { ...state.input.checklist, [action.key]: action.value },
         },
       };
+    case 'prefill':
+      return {
+        ...state,
+        input: { ...state.input, ...action.patch },
+        extracted: action.extracted || [],
+      };
     case 'step':
       return { ...state, step: Math.max(0, Math.min(FORM_STEPS - 1, action.step)) };
     case 'screen':
@@ -53,7 +60,7 @@ function reducer(state, action) {
     case 'saved':
       return { ...state, saved: action.list };
     case 'reset':
-      return { ...state, input: { ...DEFAULT_INPUT }, step: 0, result: null, screen: 'form' };
+      return { ...state, input: { ...DEFAULT_INPUT }, step: 0, result: null, screen: 'form', extracted: [] };
     case 'restore':
       return { ...state, ...action.patch };
     default:
@@ -71,6 +78,7 @@ export function AppProvider({ children }) {
     screen: 'form',
     result: null,
     saved: [],
+    extracted: [],
   });
 
   // Load reference data once, then restore any saved list + draft.
@@ -112,6 +120,17 @@ export function AppProvider({ children }) {
       }
     };
 
+    // Parse a pasted listing and auto-fill the form (all fields stay editable).
+    const prefillFromAd = (text) => {
+      const { input: patch, extracted } = parseAdText(text, refs?.benchmarks);
+      patch.adText = text;
+      if (patch.neighborhood && !patch.walkMinutes && refs?.benchmarks) {
+        patch.walkMinutes = walkPrefill(refs.benchmarks, patch.neighborhood);
+      }
+      dispatch({ type: 'prefill', patch, extracted });
+      return extracted.length;
+    };
+
     const goStep = (step) => dispatch({ type: 'step', step });
     const goto = (screen) => {
       dispatch({ type: 'screen', screen });
@@ -143,7 +162,7 @@ export function AppProvider({ children }) {
     };
 
     return {
-      setField, setDeposit, setChecklist, setNeighborhood,
+      setField, setDeposit, setChecklist, setNeighborhood, prefillFromAd,
       goStep, goto, compute, saveListing, deleteListing, resetDraft,
       FORM_STEPS,
     };

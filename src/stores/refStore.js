@@ -39,3 +39,21 @@ export function walkPrefill(benchmarks, key) {
   const { min, max } = hood.walkMin;
   return Math.round((min + max) / 2);
 }
+
+/**
+ * Match free text / a pasted address against a benchmark neighborhood.
+ * Checks each neighborhood's display name + optional `aliases` (Hebrew variants,
+ * street names). Returns the matching key, or 'other' (→ general estimator).
+ */
+export function resolveNeighborhoodFromText(benchmarks, text) {
+  if (!benchmarks?.neighborhoods || !text) return 'other';
+  const t = String(text);
+  // longest names first so "שכונה ג'" beats a bare "ג'"
+  const entries = Object.entries(benchmarks.neighborhoods)
+    .map(([key, v]) => ({ key, names: [v.name, ...(v.aliases || [])].filter(Boolean) }))
+    .sort((a, b) => Math.max(...b.names.map((n) => n.length)) - Math.max(...a.names.map((n) => n.length)));
+  for (const { key, names } of entries) {
+    if (names.some((n) => n && t.includes(n))) return key;
+  }
+  return 'other';
+}

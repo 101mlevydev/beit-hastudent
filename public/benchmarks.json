@@ -1,45 +1,28 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "dataDate": "2026-06",
   "disclaimer": "טווחים מקומיים לעיון בלבד — לא מדד מחירים רשמי. ניתן לעריכה.",
   "campusAnchor": "שער ראשי, אוניברסיטת בן-גוריון",
-  "_note": "Reconciled 2026-06 snapshot from BGU housing guide, bgu.co.il, do-israel, Madlan + arnona rate tables. perRoom = ₪/month per Israeli room (a '3-room' apt ≈ 2BR+salon → expected rent ≈ perRoom × rooms). Gimel/Dalet/Old-City have direct source anchors; Ringelblum/Masada are interpolated. Still pending the Step 12 content gate (local verification).",
+  "_note": "Reconciled 2026-06 snapshot covering Be'er Sheva neighborhoods (BGU housing guide, do-israel, Madlan, madadirot, city DB). perRoom = ₪/month per Israeli room (a '3-room' apt ≈ 2BR+salon → expected rent ≈ perRoom × rooms). Each entry has `aliases` for free-text/address matching. Near-campus entries anchored to ~₪1,100-1,250/room. Far/new neighborhoods are lower-confidence estimates. Pending the Step 12 content gate (local verification).",
   "neighborhoods": {
-    "gimel": {
-      "name": "שכונה ג'",
-      "perRoom": { "min": 850, "typical": 1100, "max": 1350 },
-      "walkMin": { "min": 10, "max": 18 },
-      "sun": "mixed",
-      "notes": "מלאי ישן, מאוד פופולרי בקרב סטודנטים, ~10-15 דק' הליכה; בד\"כ מעט זול יותר מד'"
-    },
-    "dalet": {
-      "name": "שכונה ד'",
-      "perRoom": { "min": 950, "typical": 1200, "max": 1450 },
-      "walkMin": { "min": 3, "max": 12 },
-      "sun": "mixed",
-      "notes": "הכי קרובה/אוריינטציה סטודנטיאלית (3-10 דק'); פרמיית קרבה. דירת 2 חד' ~3,200 ₪"
-    },
-    "ringelblum": {
-      "name": "רינגלבלום",
-      "perRoom": { "min": 1000, "typical": 1250, "max": 1500 },
-      "walkMin": { "min": 5, "max": 15 },
-      "sun": "exposed",
-      "notes": "סמוך לקמפוס (צד ד'), חלק מהבניינים חדשים יותר; הערכה מעט מעל ממוצע ד'"
-    },
-    "masada": {
-      "name": "מצדה",
-      "perRoom": { "min": 900, "typical": 1150, "max": 1400 },
-      "walkMin": { "min": 12, "max": 22 },
-      "sun": "mixed",
-      "notes": "רחוב מרכזי ליד המרכז/העיר העתיקה; מלאי מעורב — הערכה קרובה לממוצע העירוני"
-    },
-    "old-city": {
-      "name": "העיר העתיקה",
-      "perRoom": { "min": 800, "typical": 1100, "max": 1400 },
-      "walkMin": { "min": 12, "max": 22 },
-      "sun": "mixed",
-      "notes": "מבנים ישנים + בתים פרטיים עם חצר; פיזור רחב (לופטים משופצים יקרים יותר) — בדקו תחזוקה"
-    }
+    "gimel": { "name": "שכונה ג'", "perRoom": { "min": 950, "typical": 1150, "max": 1450 }, "walkMin": { "min": 5, "max": 15 }, "confidence": "high", "notes": "צמודה לקמפוס, מאוד סטודנטיאלית.", "aliases": ["שכונה ג'", "שכונה ג", "גימל", "gimel", "רחוב טרומפלדור", "רחוב בן צבי"] },
+    "dalet": { "name": "שכונה ד'", "perRoom": { "min": 950, "typical": 1200, "max": 1500 }, "walkMin": { "min": 3, "max": 12 }, "confidence": "high", "notes": "הכי קרובה לשער הראשי.", "aliases": ["שכונה ד'", "שכונה ד", "דלת", "dalet", "daled", "רחוב רגר"] },
+    "ringelblum": { "name": "רינגלבלום", "perRoom": { "min": 950, "typical": 1150, "max": 1450 }, "walkMin": { "min": 3, "max": 12 }, "confidence": "high", "notes": "סמוך לכניסה הצפונית, הרבה אוכל.", "aliases": ["רינגלבלום", "ringelblum", "שכונה ו'", "שכונה ו", "vav", "רחוב רינגלבלום"] },
+    "masada": { "name": "מצדה", "perRoom": { "min": 1000, "typical": 1200, "max": 1500 }, "walkMin": { "min": 5, "max": 15 }, "confidence": "med", "notes": "רצועת סטודנטים מרכזית.", "aliases": ["מצדה", "masada", "רחוב מצדה"] },
+    "old-city": { "name": "העיר העתיקה", "perRoom": { "min": 850, "typical": 1050, "max": 1400 }, "walkMin": { "min": 18, "max": 30 }, "confidence": "med", "notes": "זול ואקלקטי, רחוק יותר (לרוב אוטובוס).", "aliases": ["העיר העתיקה", "עיר עתיקה", "old city", "רחוב הרצל", "שוק העיר העתיקה"] },
+    "bet": { "name": "שכונה ב'", "perRoom": { "min": 850, "typical": 1050, "max": 1350 }, "walkMin": { "min": 15, "max": 25 }, "confidence": "med", "notes": "שקטה, ליד פארק הסופרים, ערך טוב.", "aliases": ["שכונה ב'", "שכונה ב", "בית", "bet", "פארק הסופרים", "רחוב יהודה הלוי"] },
+    "aleph": { "name": "שכונה א'", "perRoom": { "min": 800, "typical": 1000, "max": 1300 }, "walkMin": { "min": 15, "max": 25 }, "confidence": "low", "notes": "ליבה ותיקה, נוכחות סטודנטים צנועה.", "aliases": ["שכונה א'", "שכונה א", "אלף", "aleph", "alef"] },
+    "hey": { "name": "שכונה ה'", "perRoom": { "min": 800, "typical": 1000, "max": 1300 }, "walkMin": { "min": 18, "max": 28 }, "confidence": "med", "notes": "מלאי ישן, רחוק מהקמפוס, זול.", "aliases": ["שכונה ה'", "שכונה ה", "hey"] },
+    "neve-zeev": { "name": "נווה זאב", "perRoom": { "min": 900, "typical": 1100, "max": 1350 }, "walkMin": { "min": 25, "max": 40 }, "confidence": "med", "notes": "משפחתית בצפון-מערב, צריך אוטובוס.", "aliases": ["נווה זאב", "neve zeev", "נאות אילן", "naot ilan"] },
+    "neve-noy": { "name": "נווה נוי", "perRoom": { "min": 950, "typical": 1200, "max": 1450 }, "walkMin": { "min": 25, "max": 40 }, "confidence": "med", "notes": "שכונה משפחתית מבוקשת, דירות גדולות.", "aliases": ["נווה נוי", "neve noy", "neve noi", "נוי"] },
+    "ramot": { "name": "רמות", "perRoom": { "min": 950, "typical": 1200, "max": 1500 }, "walkMin": { "min": 15, "max": 30 }, "confidence": "med", "notes": "צפון-מערב מבוסס, דירות גדולות.", "aliases": ["רמות", "ramot", "רמות ד'", "רמת באקה"] },
+    "neve-menachem": { "name": "נווה מנחם", "perRoom": { "min": 900, "typical": 1100, "max": 1350 }, "walkMin": { "min": 25, "max": 40 }, "confidence": "low", "notes": "חגורת המשפחות, נתוני שכירות מועטים.", "aliases": ["נווה מנחם", "neve menachem", "מנחם"] },
+    "naot-lon": { "name": "נאות לון (נחל בקע)", "perRoom": { "min": 900, "typical": 1150, "max": 1400 }, "walkMin": { "min": 20, "max": 30 }, "confidence": "med", "notes": "כולל כיס סטודנטים בנחל בקע.", "aliases": ["נאות לון", "naot lon", "naot lonit", "נחל בקע", "nahal beka", "שכונת נחל בקע"] },
+    "park-hanachal": { "name": "פארק הנחל", "perRoom": { "min": 1100, "typical": 1350, "max": 1700 }, "walkMin": { "min": 30, "max": 45 }, "confidence": "low", "notes": "שכונה חדשה ומודרנית, יקרה, רחוקה.", "aliases": ["פארק הנחל", "park hanachal", "הפארק", "רמת אברהם"] },
+    "naot-hadarim": { "name": "נאות הדרים (היוצרים)", "perRoom": { "min": 1100, "typical": 1300, "max": 1650 }, "walkMin": { "min": 30, "max": 45 }, "confidence": "low", "notes": "כניסה דרומית חדשה, מלאי מודרני.", "aliases": ["נאות הדרים", "naot hadarim", "הדרים", "שכונת היוצרים", "היוצרים"] },
+    "sigaliot": { "name": "סיגליות", "perRoom": { "min": 1100, "typical": 1300, "max": 1650 }, "walkMin": { "min": 30, "max": 45 }, "confidence": "low", "notes": "כניסה מערבית חדשה, מודרנית.", "aliases": ["סיגליות", "sigaliot", "הסיגליות"] },
+    "city-center": { "name": "מרכז העיר", "perRoom": { "min": 900, "typical": 1100, "max": 1450 }, "walkMin": { "min": 15, "max": 25 }, "confidence": "low", "notes": "ליבה מסחרית, תחבורה טובה לקמפוס.", "aliases": ["מרכז העיר", "city center", "merkaz", "רחוב הרצל", "קק״ל"] },
+    "ramat-reiger": { "name": "רמת רייגר", "perRoom": { "min": 1000, "typical": 1250, "max": 1550 }, "walkMin": { "min": 5, "max": 15 }, "confidence": "med", "notes": "כיס סטודנטים פופולרי, ~5 דק' לקמפוס.", "aliases": ["רמת רייגר", "ramat reiger", "רייגר", "שדרות רגר"] }
   },
   "fallback": {
     "name": "סטודנטים בבאר שבע (כללי)",
@@ -51,6 +34,6 @@
     "arnonaMonthly": { "room2_40sqm": [120, 140, 170], "room3_70sqm": [220, 260, 320], "room4_90sqm": [400, 470, 560] },
     "arnonaNote": "מחושב דו-חודשי; הנחת סטודנט עד ~25% בכפוף לבקשה (ינואר-פברואר).",
     "vaadBayitMonthly": [0, 80, 200],
-    "deposit": { "monthsTypical": 2, "legalCapMonths": 3, "note": "שוק הסטודנטים בד\"כ 1-2 חודשים + ערבים/צ'קים." }
+    "deposit": { "monthsTypical": 2, "legalCapMonths": 3, "note": "שוק הסטודנטים בד״כ 1-2 חודשים + ערבים/צ'קים." }
   }
 }
